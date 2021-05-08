@@ -1,9 +1,8 @@
 package io.lalahtalks.user.gateway.server.http.api.account;
 
-import io.lalahtalks.user.gateway.server.domain.account.AccountCreated;
-import io.lalahtalks.user.gateway.server.domain.account.AccountCreationRequest;
-import io.lalahtalks.user.gateway.server.domain.account.AccountService;
-import io.lalahtalks.user.gateway.server.domain.account.Email;
+import io.lalahtalks.user.gateway.server.domain.account.*;
+import io.lalahtalks.user.gateway.server.domain.user.Email;
+import io.lalahtalks.user.gateway.server.domain.user.Password;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +33,8 @@ public class AccountsController {
 
     private AccountCreationRequest fromDto(AccountCreationRequestDto requestDto) {
         return AccountCreationRequest.builder()
-                .email(new Email(requestDto.email))
+                .email(new Email(requestDto.getEmail()))
+                .password(new Password(requestDto.getPassword()))
                 .build();
     }
 

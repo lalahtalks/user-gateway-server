@@ -24,14 +24,15 @@ public class HttpAccountGateway implements AccountGateway {
 
     private AccountCreated fromDto(io.lalahtalks.accounts.client.dto.AccountCreatedDto accountCreatedDto) {
         return AccountCreated.builder()
-                .accountId(new AccountId(accountCreatedDto.accountId))
-                .createdAt(accountCreatedDto.createdAt)
+                .accountId(new AccountId(accountCreatedDto.getAccountId()))
+                .createdAt(accountCreatedDto.getCreatedAt())
                 .build();
     }
 
     private AccountCreationRequestDto toDto(AccountCreationRequest request) {
         return AccountCreationRequestDto.builder()
                 .email(request.getEmail().getValue())
+                .password(request.getPassword().getValue())
                 .build();
     }
 

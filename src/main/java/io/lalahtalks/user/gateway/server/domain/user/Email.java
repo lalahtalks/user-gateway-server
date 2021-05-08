@@ -1,4 +1,4 @@
-package io.lalahtalks.user.gateway.server.domain.account;
+package io.lalahtalks.user.gateway.server.domain.user;
 
 import lombok.NonNull;
 import lombok.Value;

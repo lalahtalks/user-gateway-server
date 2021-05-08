@@ -15,9 +15,9 @@ import java.time.Instant;
 public class AccountCreatedDto {
 
     @JsonProperty("accountId")
-    public String accountId;
+    private String accountId;
 
     @JsonProperty("createdAt")
-    public Instant createdAt;
+    private Instant createdAt;
 
 }

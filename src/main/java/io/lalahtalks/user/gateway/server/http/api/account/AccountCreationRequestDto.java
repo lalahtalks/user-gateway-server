@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 public class AccountCreationRequestDto {
 
     @JsonProperty("email")
-    public String email;
+    private String email;
+
+    @JsonProperty("password")
+    private String password;
 
 }
