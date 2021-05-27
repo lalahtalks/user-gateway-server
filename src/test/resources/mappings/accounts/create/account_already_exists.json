@@ -1,0 +1,30 @@
+{
+  "request": {
+    "urlPath": "/accounts/accounts",
+    "method": "POST",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Bearer abc"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "email": "already_exists@test.com",
+          "password": "my_password"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 409,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "type": "urn:lalahtalks:problem:accounts:account-already-exists",
+      "title": "Account already exists",
+      "status": 409
+    }
+  }
+}

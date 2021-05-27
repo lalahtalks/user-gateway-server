@@ -2,10 +2,7 @@ package io.lalahtalks.user.gateway.server.http.gateway;
 
 import io.lalahtalks.accounts.client.dto.AccountCreationRequestDto;
 import io.lalahtalks.accounts.client.http.AccountsHttpClient;
-import io.lalahtalks.user.gateway.server.domain.account.AccountCreated;
-import io.lalahtalks.user.gateway.server.domain.account.AccountCreationRequest;
-import io.lalahtalks.user.gateway.server.domain.account.AccountGateway;
-import io.lalahtalks.user.gateway.server.domain.account.AccountId;
+import io.lalahtalks.user.gateway.server.domain.account.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +14,13 @@ public class HttpAccountGateway implements AccountGateway {
 
     @Override
     public AccountCreated create(AccountCreationRequest request) {
-        var requestDto = toDto(request);
-        var accountCreatedDto = accountsHttpClient.create(requestDto);
-        return fromDto(accountCreatedDto);
+        try {
+            var requestDto = toDto(request);
+            var accountCreatedDto = accountsHttpClient.create(requestDto);
+            return fromDto(accountCreatedDto);
+        } catch (io.lalahtalks.accounts.client.http.exception.AccountAlreadyExistsException e) {
+            throw new AccountAlreadyExistsException();
+        }
     }
 
     private AccountCreated fromDto(io.lalahtalks.accounts.client.dto.AccountCreatedDto accountCreatedDto) {

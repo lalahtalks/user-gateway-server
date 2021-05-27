@@ -16,6 +16,7 @@
     <properties>
         <accounts-client.version>1.0-SNAPSHOT</accounts-client.version>
         <starter.version>1.0-SNAPSHOT</starter.version>
+        <user-gateway-client.version>1.0-SNAPSHOT</user-gateway-client.version>
     </properties>
 
     <build>
@@ -37,6 +38,38 @@
             <groupId>io.lalahtalks</groupId>
             <artifactId>server-spring-boot-starter</artifactId>
             <version>${starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lalahtalks</groupId>
+            <artifactId>user-gateway-client-dto</artifactId>
+            <version>${user-gateway-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lalahtalks</groupId>
+            <artifactId>user-gateway-client-http-contract</artifactId>
+            <version>${user-gateway-client.version}</version>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-wiremock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

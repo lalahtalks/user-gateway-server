@@ -1,0 +1,19 @@
+lalahtalks:
+  accounts-http-api:
+    url: http://localhost:${wiremock.server.port}/accounts
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          lalahtalks:
+            authorization-grant-type: client_credentials
+            client-id: "client-id"
+            client-secret: "client-secret"
+        provider:
+          lalahtalks:
+            jwk-set-uri: http://localhost:${wiremock.server.port}/auth/realms/lalahtalks/protocol/openid-connect/certs
+            token-uri: http://localhost:${wiremock.server.port}/auth/realms/lalahtalks/protocol/openid-connect/token
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:${wiremock.server.port}/auth/realms/lalahtalks/protocol/openid-connect/certs
