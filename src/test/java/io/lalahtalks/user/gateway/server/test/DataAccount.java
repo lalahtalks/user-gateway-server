@@ -12,11 +12,13 @@ public class DataAccount {
 
     public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_1_DTO = AccountCreationRequestDto.builder()
             .email("test@test.com")
+            .username("User 1")
             .password("my_password")
             .build();
 
     public static final AccountCreationRequestDto ACCOUNT_CREATION_REQUEST_2_DTO = AccountCreationRequestDto.builder()
             .email("already_exists@test.com")
+            .username("User 1")
             .password("my_password")
             .build();
 

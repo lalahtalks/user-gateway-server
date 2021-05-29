@@ -8,16 +8,18 @@ import io.lalahtalks.user.gateway.server.domain.account.AccountCreationRequest;
 import io.lalahtalks.user.gateway.server.domain.account.AccountService;
 import io.lalahtalks.user.gateway.server.domain.user.Email;
 import io.lalahtalks.user.gateway.server.domain.user.Password;
+import io.lalahtalks.user.gateway.server.domain.user.Username;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 
+import static io.lalahtalks.user.gateway.client.http.contract.UserGatewayHttpPaths.ACCOUNTS_PATH;
 import static io.lalahtalks.user.gateway.client.http.contract.UserGatewayProblemType.ACCOUNT_ALREADY_EXISTS;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping(ACCOUNTS_PATH)
 @RequiredArgsConstructor
 public class AccountsController {
 
@@ -47,6 +49,7 @@ public class AccountsController {
     private AccountCreationRequest fromDto(AccountCreationRequestDto requestDto) {
         return AccountCreationRequest.builder()
                 .email(new Email(requestDto.getEmail()))
+                .username(new Username(requestDto.getUsername()))
                 .password(new Password(requestDto.getPassword()))
                 .build();
     }

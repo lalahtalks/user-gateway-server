@@ -33,6 +33,7 @@ public class HttpAccountGateway implements AccountGateway {
     private AccountCreationRequestDto toDto(AccountCreationRequest request) {
         return AccountCreationRequestDto.builder()
                 .email(request.getEmail().getValue())
+                .username(request.getUsername().getValue())
                 .password(request.getPassword().getValue())
                 .build();
     }
