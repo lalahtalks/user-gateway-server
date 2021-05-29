@@ -9,6 +9,10 @@ public class AccountService {
 
     private final AccountGateway accountGateway;
 
+    public Account get(AccountId accountId) {
+        return accountGateway.get(accountId);
+    }
+
     public AccountCreated create(AccountCreationRequest request) {
         return accountGateway.create(request);
     }
