@@ -15,6 +15,8 @@
 
     <properties>
         <accounts-client.version>1.0-SNAPSHOT</accounts-client.version>
+        <paging.version>1.0-SNAPSHOT</paging.version>
+        <secrets-client.version>1.0-SNAPSHOT</secrets-client.version>
         <starter.version>1.0-SNAPSHOT</starter.version>
         <user-gateway-client.version>1.0-SNAPSHOT</user-gateway-client.version>
     </properties>
@@ -33,6 +35,16 @@
             <groupId>io.lalahtalks</groupId>
             <artifactId>accounts-client-http-spring-boot-starter</artifactId>
             <version>${accounts-client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lalahtalks</groupId>
+            <artifactId>paging-dto-spring-boot-starter</artifactId>
+            <version>${paging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lalahtalks</groupId>
+            <artifactId>secrets-client-http-spring-boot-starter</artifactId>
+            <version>${secrets-client.version}</version>
         </dependency>
         <dependency>
             <groupId>io.lalahtalks</groupId>

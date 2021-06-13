@@ -1,6 +1,8 @@
 lalahtalks:
   accounts-http-api:
     url: http://localhost:${wiremock.server.port}/accounts
+  secrets-http-api:
+    url: http://localhost:${wiremock.server.port}/secrets
 spring:
   security:
     oauth2:
