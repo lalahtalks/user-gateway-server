@@ -1,9 +1,11 @@
 package io.lalahtalks.user.gateway.server.domain.account;
 
+import reactor.core.publisher.Mono;
+
 public interface AccountGateway {
 
-    Account get(AccountId accountId);
+    Mono<Account> get(AccountId accountId);
 
-    AccountCreated create(AccountCreationRequest request);
+    Mono<AccountCreated> create(AccountCreationRequest request);
 
 }

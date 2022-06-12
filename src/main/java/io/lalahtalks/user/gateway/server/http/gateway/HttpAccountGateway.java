@@ -4,61 +4,61 @@ import io.lalahtalks.accounts.client.dto.AccountCreatedDto;
 import io.lalahtalks.accounts.client.dto.AccountCreationRequestDto;
 import io.lalahtalks.accounts.client.dto.AccountDto;
 import io.lalahtalks.accounts.client.http.AccountsHttpClient;
+import io.lalahtalks.accounts.client.http.contract.problem.AccountAlreadyExistsProblem;
+import io.lalahtalks.accounts.client.http.contract.problem.AccountNotFoundProblem;
 import io.lalahtalks.user.gateway.server.domain.account.*;
 import io.lalahtalks.user.gateway.server.domain.user.Email;
 import io.lalahtalks.user.gateway.server.domain.user.Username;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
-@RequiredArgsConstructor
 public class HttpAccountGateway implements AccountGateway {
 
     private final AccountsHttpClient accountsHttpClient;
 
-    @Override
-    public Account get(AccountId accountId) {
-        try {
-            var accountDto = accountsHttpClient.get(accountId.getValue());
-            return fromDto(accountDto);
-        } catch (io.lalahtalks.accounts.client.http.exception.AccountNotFoundException e) {
-            throw new AccountNotFoundException();
-        }
+    public HttpAccountGateway(AccountsHttpClient accountsHttpClient) {
+        this.accountsHttpClient = accountsHttpClient;
     }
 
     @Override
-    public AccountCreated create(AccountCreationRequest request) {
-        try {
-            var requestDto = toDto(request);
-            var accountCreatedDto = accountsHttpClient.create(requestDto);
-            return fromDto(accountCreatedDto);
-        } catch (io.lalahtalks.accounts.client.http.exception.AccountAlreadyExistsException e) {
-            throw new AccountAlreadyExistsException();
-        }
+    public Mono<Account> get(AccountId accountId) {
+        return accountsHttpClient.get(accountId.value())
+                .map(this::from)
+                .doOnError(AccountNotFoundProblem.class, e -> {
+                    throw new AccountNotFoundException();
+                });
     }
 
-    private Account fromDto(AccountDto accountDto) {
-        return Account.builder()
-                .id(new AccountId(accountDto.getId()))
-                .email(new Email(accountDto.getEmail()))
-                .username(new Username(accountDto.getUsername()))
-                .createdAt(accountDto.getCreatedAt())
-                .build();
+    @Override
+    public Mono<AccountCreated> create(AccountCreationRequest request) {
+        var requestDto = to(request);
+        return accountsHttpClient.create(requestDto)
+                .map(this::from)
+                .doOnError(AccountAlreadyExistsProblem.class, e -> {
+                    throw new AccountAlreadyExistsException();
+                });
     }
 
-    private AccountCreated fromDto(AccountCreatedDto accountCreatedDto) {
-        return AccountCreated.builder()
-                .accountId(new AccountId(accountCreatedDto.getAccountId()))
-                .createdAt(accountCreatedDto.getCreatedAt())
-                .build();
+    private Account from(AccountDto accountDto) {
+        return new Account(
+                new AccountId(accountDto.id()),
+                new Email(accountDto.email()),
+                new Username(accountDto.username()),
+                accountDto.createdAt());
     }
 
-    private AccountCreationRequestDto toDto(AccountCreationRequest request) {
-        return AccountCreationRequestDto.builder()
-                .email(request.getEmail().getValue())
-                .username(request.getUsername().getValue())
-                .password(request.getPassword().getValue())
-                .build();
+    private AccountCreated from(AccountCreatedDto accountCreatedDto) {
+        return new AccountCreated(
+                new AccountId(accountCreatedDto.accountId()),
+                accountCreatedDto.createdAt());
+    }
+
+    private AccountCreationRequestDto to(AccountCreationRequest request) {
+        return new AccountCreationRequestDto(
+                request.email().value(),
+                request.username().value(),
+                request.password().value());
     }
 
 }

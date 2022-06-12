@@ -7,13 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 class SecretDtoMapper {
 
-    SecretDto toDto(Secret secret) {
-        return SecretDto.builder()
-                .id(secret.getId().getValue())
-                .name(secret.getName().getValue())
-                .encoded(secret.getEncoded().getValue())
-                .createdAt(secret.getCreatedAt())
-                .build();
+    SecretDto to(Secret secret) {
+        return new SecretDto(
+                secret.id().value(),
+                secret.name().value(),
+                secret.encoded().value(),
+                secret.createdAt());
     }
 
 }

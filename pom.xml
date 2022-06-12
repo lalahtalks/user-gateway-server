@@ -17,7 +17,7 @@
         <accounts-client.version>1.0-SNAPSHOT</accounts-client.version>
         <paging.version>1.0-SNAPSHOT</paging.version>
         <secrets-client.version>1.0-SNAPSHOT</secrets-client.version>
-        <starter.version>1.0-SNAPSHOT</starter.version>
+        <spring-starters.version>1.0-SNAPSHOT</spring-starters.version>
         <user-gateway-client.version>1.0-SNAPSHOT</user-gateway-client.version>
     </properties>
 
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>io.lalahtalks</groupId>
             <artifactId>server-spring-boot-starter</artifactId>
-            <version>${starter.version}</version>
+            <version>${spring-starters.version}</version>
         </dependency>
         <dependency>
             <groupId>io.lalahtalks</groupId>
@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -15,27 +15,24 @@ import org.springframework.stereotype.Component;
 class AccountDtoMapper {
 
     AccountDto toDto(Account account) {
-        return AccountDto.builder()
-                .id(account.getId().getValue())
-                .email(account.getEmail().getValue())
-                .username(account.getUsername().getValue())
-                .createdAt(account.getCreatedAt())
-                .build();
+        return new AccountDto(
+                account.id().value(),
+                account.email().value(),
+                account.username().value(),
+                account.createdAt());
     }
 
     AccountCreatedDto toDto(AccountCreated created) {
-        return AccountCreatedDto.builder()
-                .accountId(created.getAccountId().getValue())
-                .createdAt(created.getCreatedAt())
-                .build();
+        return new AccountCreatedDto(
+                created.accountId().value(),
+                created.createdAt());
     }
 
     AccountCreationRequest fromDto(AccountCreationRequestDto requestDto) {
-        return AccountCreationRequest.builder()
-                .email(new Email(requestDto.getEmail()))
-                .username(new Username(requestDto.getUsername()))
-                .password(new Password(requestDto.getPassword()))
-                .build();
+        return new AccountCreationRequest(
+                new Email(requestDto.email()),
+                new Username(requestDto.username()),
+                new Password(requestDto.password()));
     }
 
 }

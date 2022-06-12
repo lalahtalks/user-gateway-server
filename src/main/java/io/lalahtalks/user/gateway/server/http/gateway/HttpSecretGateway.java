@@ -7,29 +7,32 @@ import io.lalahtalks.secrets.client.dto.SecretDto;
 import io.lalahtalks.secrets.client.http.SecretsHttpClient;
 import io.lalahtalks.user.gateway.server.domain.account.AccountId;
 import io.lalahtalks.user.gateway.server.domain.secret.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
-@RequiredArgsConstructor
 public class HttpSecretGateway implements SecretGateway {
 
     private final PageDtoMapper pageDtoMapper;
     private final SecretsHttpClient secretsHttpClient;
 
-    @Override
-    public Page<Secret> getPage(AccountId accountId, PageRequest request) {
-        var page = secretsHttpClient.getPage(accountId.getValue(), request.getPageNumber(), request.getPageSize());
-        return pageDtoMapper.fromDto(page, this::fromDto);
+    public HttpSecretGateway(PageDtoMapper pageDtoMapper, SecretsHttpClient secretsHttpClient) {
+        this.pageDtoMapper = pageDtoMapper;
+        this.secretsHttpClient = secretsHttpClient;
     }
 
-    private Secret fromDto(SecretDto dto) {
-        return Secret.builder()
-                .id(new SecretId(dto.getId()))
-                .name(new SecretName(dto.getName()))
-                .encoded(new SecretEncoded(dto.getEncoded()))
-                .createdAt(dto.getCreatedAt())
-                .build();
+    @Override
+    public Mono<Page<Secret>> getPage(AccountId accountId, PageRequest request) {
+        return secretsHttpClient.getPage(accountId.value(), request.pageNumber(), request.pageSize())
+                .map(page -> pageDtoMapper.from(page, this::from));
+    }
+
+    private Secret from(SecretDto dto) {
+        return new Secret(
+                new SecretId(dto.id()),
+                new SecretName(dto.name()),
+                new SecretEncoded(dto.encoded()),
+                dto.createdAt());
     }
 
 }
