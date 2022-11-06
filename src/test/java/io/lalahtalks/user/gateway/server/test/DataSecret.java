@@ -2,9 +2,9 @@ package io.lalahtalks.user.gateway.server.test;
 
 import io.lalahtalks.paging.dto.PagingDto;
 import io.lalahtalks.paging.dto.SortDto;
-import io.lalahtalks.user.gateway.client.dto.SecretDto;
-import io.lalahtalks.user.gateway.client.dto.SecretEncodedDto;
-import io.lalahtalks.user.gateway.client.dto.SecretPageDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretEncodedDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretPageDto;
 
 import java.util.List;
 

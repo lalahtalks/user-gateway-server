@@ -6,6 +6,8 @@ import io.lalahtalks.paging.dto.PageDtoMapper;
 import io.lalahtalks.secrets.client.http.SecretsHttpClient;
 import io.lalahtalks.user.gateway.server.domain.account.AccountId;
 import io.lalahtalks.user.gateway.server.domain.secret.Secret;
+import io.lalahtalks.user.gateway.server.domain.secret.SecretCreated;
+import io.lalahtalks.user.gateway.server.domain.secret.SecretCreationRequest;
 import io.lalahtalks.user.gateway.server.domain.secret.SecretGateway;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -30,6 +32,13 @@ public class HttpSecretGateway implements SecretGateway {
     public Mono<Page<Secret>> getPage(AccountId accountId, PageRequest request) {
         return secretsHttpClient.getPage(accountId.value(), request.pageNumber(), request.pageSize())
                 .map(page -> pageDtoMapper.from(page, secretDtoMapper::from));
+    }
+
+    @Override
+    public Mono<SecretCreated> create(AccountId accountId, SecretCreationRequest request) {
+        var requestDto = secretDtoMapper.to(request);
+        return secretsHttpClient.create(accountId.value(), requestDto)
+                .map(secretDtoMapper::from);
     }
 
 }

@@ -1,8 +1,8 @@
 package io.lalahtalks.user.gateway.server.test;
 
-import io.lalahtalks.user.gateway.client.dto.AccountCreatedDto;
-import io.lalahtalks.user.gateway.client.dto.AccountCreationRequestDto;
-import io.lalahtalks.user.gateway.client.dto.AccountDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountCreatedDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountCreationRequestDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountDto;
 
 import static io.lalahtalks.user.gateway.server.test.DataInstant.NOW;
 

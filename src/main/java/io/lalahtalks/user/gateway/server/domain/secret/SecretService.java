@@ -19,4 +19,8 @@ public class SecretService {
         return secretGateway.getPage(accountId, request);
     }
 
+    public Mono<SecretCreated> create(AccountId accountId, SecretCreationRequest request) {
+        return secretGateway.create(accountId, request);
+    }
+
 }

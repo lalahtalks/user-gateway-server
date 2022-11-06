@@ -1,6 +1,6 @@
 package io.lalahtalks.user.gateway.server;
 
-import io.lalahtalks.user.gateway.client.dto.SecretPageDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretPageDto;
 import io.lalahtalks.user.gateway.server.test.ContextAware;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

@@ -1,15 +1,34 @@
 package io.lalahtalks.user.gateway.server.http.api.secret;
 
-import io.lalahtalks.user.gateway.client.dto.SecretDto;
-import io.lalahtalks.user.gateway.client.dto.SecretEncodedDto;
-import io.lalahtalks.user.gateway.server.domain.secret.Secret;
-import io.lalahtalks.user.gateway.server.domain.secret.SecretEncoded;
-import io.lalahtalks.user.gateway.server.domain.secret.SecretUrl;
-import io.lalahtalks.user.gateway.server.domain.secret.SecretUsername;
+import io.lalahtalks.secrets.client.dto.SecretCreatedDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretCreationRequestDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretDto;
+import io.lalahtalks.user.gateway.client.dto.secret.SecretEncodedDto;
+import io.lalahtalks.user.gateway.server.domain.secret.*;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 class ApiSecretDtoMapper {
+
+    SecretEncoded from(SecretEncodedDto dto) {
+        var url = Optional.ofNullable(dto.url())
+                .map(SecretUrl::new);
+        var username = Optional.ofNullable(dto.username())
+                .map(SecretUsername::new);
+        return new SecretEncoded(
+                new SecretName(dto.name()),
+                url,
+                username,
+                new SecretPassword(dto.password())
+        );
+    }
+
+    SecretCreationRequest from(SecretCreationRequestDto dto) {
+        var encoded = from(dto.encoded());
+        return new SecretCreationRequest(encoded);
+    }
 
     SecretEncodedDto to(SecretEncoded encoded) {
         var url = encoded.url()
@@ -22,8 +41,7 @@ class ApiSecretDtoMapper {
                 encoded.name().value(),
                 url,
                 username,
-                encoded.password().value()
-        );
+                encoded.password().value());
     }
 
     SecretDto to(Secret secret) {
@@ -32,6 +50,12 @@ class ApiSecretDtoMapper {
                 secret.id().value(),
                 encoded,
                 secret.createdAt());
+    }
+
+    SecretCreatedDto to(SecretCreated created) {
+        return new SecretCreatedDto(
+                created.secretId().value(),
+                created.createdAt());
     }
 
 }

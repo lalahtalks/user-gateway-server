@@ -9,4 +9,6 @@ public interface SecretGateway {
 
     Mono<Page<Secret>> getPage(AccountId accountId, PageRequest request);
 
+    Mono<SecretCreated> create(AccountId accountId, SecretCreationRequest request);
+
 }

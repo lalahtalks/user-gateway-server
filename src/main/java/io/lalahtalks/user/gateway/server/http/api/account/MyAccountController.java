@@ -1,8 +1,8 @@
 package io.lalahtalks.user.gateway.server.http.api.account;
 
-import io.lalahtalks.user.gateway.client.dto.AccountCreatedDto;
-import io.lalahtalks.user.gateway.client.dto.AccountCreationRequestDto;
-import io.lalahtalks.user.gateway.client.dto.AccountDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountCreatedDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountCreationRequestDto;
+import io.lalahtalks.user.gateway.client.dto.account.AccountDto;
 import io.lalahtalks.user.gateway.client.http.contract.problem.AccountAlreadyExistsProblem;
 import io.lalahtalks.user.gateway.client.http.contract.problem.AccountNotFoundProblem;
 import io.lalahtalks.user.gateway.server.domain.account.AccountAlreadyExistsException;
