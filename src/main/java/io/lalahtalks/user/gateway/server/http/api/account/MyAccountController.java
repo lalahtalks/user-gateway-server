@@ -47,7 +47,7 @@ public class MyAccountController {
     }
 
     @ExceptionHandler(AccountNotFoundException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     Problem handle(AccountNotFoundException e) {
         return new AccountNotFoundProblem(e.getMessage());
     }
