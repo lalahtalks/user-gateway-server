@@ -23,7 +23,8 @@ class CreateMyAccountTest extends ContextAware {
                 .post(MY_ACCOUNT_PATH)
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .extract().as(AccountCreatedDto.class);
+                .extract()
+                .as(AccountCreatedDto.class);
 
         assertThat(response).isEqualTo(ACCOUNT_CREATED_DTO);
     }
@@ -36,7 +37,8 @@ class CreateMyAccountTest extends ContextAware {
                 .post(MY_ACCOUNT_PATH)
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
-                .extract().as(Problem.class);
+                .extract()
+                .as(Problem.class);
 
         assertThat(response.getType()).hasToString("urn:lalahtalks:problem:user-gateway:account-already-exists");
         assertThat(response.getTitle()).isEqualTo("Account already exists");

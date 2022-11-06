@@ -22,10 +22,10 @@ import static io.lalahtalks.user.gateway.client.http.contract.UserGatewayHttpPat
 public class MySecretsController {
 
     private final PageDtoMapper pageDtoMapper;
-    private final SecretDtoMapper secretDtoMapper;
+    private final ApiSecretDtoMapper secretDtoMapper;
     private final SecretService secretService;
 
-    public MySecretsController(PageDtoMapper pageDtoMapper, SecretDtoMapper secretDtoMapper, SecretService secretService) {
+    public MySecretsController(PageDtoMapper pageDtoMapper, ApiSecretDtoMapper secretDtoMapper, SecretService secretService) {
         this.pageDtoMapper = pageDtoMapper;
         this.secretDtoMapper = secretDtoMapper;
         this.secretService = secretService;

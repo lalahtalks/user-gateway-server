@@ -22,7 +22,8 @@ class GetMyAccountTest extends ContextAware {
                 .get(MY_ACCOUNT_PATH)
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .extract().as(AccountDto.class);
+                .extract()
+                .as(AccountDto.class);
 
         assertThat(response).isEqualTo(ACCOUNT_1_DTO);
     }

@@ -4,7 +4,6 @@ import java.time.Instant;
 
 public record Secret(
         SecretId id,
-        SecretName name,
         SecretEncoded encoded,
         Instant createdAt) {
 

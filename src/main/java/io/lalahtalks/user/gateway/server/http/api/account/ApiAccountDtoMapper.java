@@ -12,7 +12,7 @@ import io.lalahtalks.user.gateway.server.domain.user.Username;
 import org.springframework.stereotype.Component;
 
 @Component
-class AccountDtoMapper {
+class ApiAccountDtoMapper {
 
     AccountDto toDto(Account account) {
         return new AccountDto(

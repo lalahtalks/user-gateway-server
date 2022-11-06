@@ -23,10 +23,10 @@ import static io.lalahtalks.user.gateway.client.http.contract.UserGatewayHttpPat
 @RequestMapping(MY_ACCOUNT_PATH)
 public class MyAccountController {
 
-    private final AccountDtoMapper accountDtoMapper;
+    private final ApiAccountDtoMapper accountDtoMapper;
     private final AccountService accountService;
 
-    public MyAccountController(AccountDtoMapper accountDtoMapper, AccountService accountService) {
+    public MyAccountController(ApiAccountDtoMapper accountDtoMapper, AccountService accountService) {
         this.accountDtoMapper = accountDtoMapper;
         this.accountService = accountService;
     }
